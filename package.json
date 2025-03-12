@@ -1,0 +1,24 @@
+{
+  "name": "investment-app-back",
+  "version": "1.0.0",
+  "description": "<div align=\"center\">   <h3 align=\"center\">Desafio Técnico Faculdade Impacta</h3>   <p align=\"center\">     Trata-se de desafio técnico proposto para conclusão do curso de graduação em Análise e Desenvolvimento de Sistemas da Faculdade Impacta.   </p> </div>",
+  "main": "server.js",
+  "scripts": {
+    "database": "npx sequelize db:drop && npx sequelize db:create && npx sequelize db:migrate",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.13.0",
+    "pg": "^8.14.0",
+    "sequelize": "^6.37.6"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.6.2"
+  }
+}
