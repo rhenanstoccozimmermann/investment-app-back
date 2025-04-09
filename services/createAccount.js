@@ -2,6 +2,7 @@ const Sequelize = require('sequelize');
 const config = require('../config/config');
 require('dotenv').config();
 const { Client, Account } = require('../models');
+const auth = require('../middlewares/generateToken');
 
 const env = process.env.NODE_ENV || 'development';
 
@@ -64,7 +65,9 @@ const createAccount = async (name, identityCard, password) => {
 
   const { id, balance } = newAccount;
 
-  return { code: 201, content: { accountId: id, balance } };
+  const token = auth.generateToken(id, password);
+
+  return { code: 201, content: { client: { accountId: id, balance}, token } };
 };
 
 module.exports = {

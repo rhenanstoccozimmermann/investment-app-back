@@ -4,9 +4,9 @@ const updateAccount = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const { password } = req.body;
+    const { currentPassword, newPassword } = req.body;
 
-    const result = await updateAccountService.updateAccount(id, password);
+    const result = await updateAccountService.updateAccount(id, currentPassword, newPassword);
 
     if (result.error) {
       const { code, message } = result.error;

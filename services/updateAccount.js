@@ -1,11 +1,12 @@
 const { Client } = require('../models');
+const auth = require('../middlewares/generateToken');
 
-const validateData = (accountId, password) => {
-  if (accountId === undefined || !password) {
+const validateData = (accountId, currentPassword, newPassword) => {
+  if (accountId === undefined || !currentPassword || !newPassword) {
     return {
       error: {
         code: 400,
-        message: 'O código da conta e a senha são obrigatórios.',
+        message: 'O código da conta e as senhas são obrigatórios.',
       },
     };
   }
@@ -13,12 +14,12 @@ const validateData = (accountId, password) => {
   return {};
 };
 
-const updateAccount = async (accountId, password) => {
-  const dataValidation = validateData(accountId, password);
+const updateAccount = async (accountId, currentPassword, newPassword) => {
+  const dataValidation = validateData(accountId, currentPassword, newPassword);
 
   if (dataValidation.error) return dataValidation;
 
-  const client = await Client.findOne({ where: { accountId } });
+  const client = await Client.findOne({ where: { accountId, password: currentPassword } });
 
   if (!client) {
     return {
@@ -29,9 +30,11 @@ const updateAccount = async (accountId, password) => {
     };
   }
 
-  await Client.update({ password }, { where: { accountId } });
+  await Client.update({ password: newPassword }, { where: { accountId } });
 
-  return { code: 200, content: { message: 'A senha foi alterada com sucesso.' } };
+  const token = auth.generateToken(accountId, newPassword);
+
+  return { code: 200, content: { token } };
 };
 
 module.exports = {
