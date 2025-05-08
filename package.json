@@ -4,7 +4,7 @@
   "description": "<div align=\"center\">   <h3 align=\"center\">Desafio Técnico Faculdade Impacta</h3>   <p align=\"center\">     Trata-se de desafio técnico proposto para conclusão do curso de graduação em Análise e Desenvolvimento de Sistemas da Faculdade Impacta.   </p> </div>",
   "main": "server.js",
   "scripts": {
-    "database": "npx sequelize db:drop && npx sequelize db:create && npx sequelize db:migrate",
+    "database": "npx sequelize db:drop && npx sequelize db:create && npx sequelize db:migrate && npx sequelize db:seed:all",
     "start": "node server.js"
   },
   "author": "",
