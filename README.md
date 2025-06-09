@@ -18,5 +18,3 @@
 ## 1. Introdução
 
 Trata-se do backend de um app de investimentos.
-
-Em construção.
